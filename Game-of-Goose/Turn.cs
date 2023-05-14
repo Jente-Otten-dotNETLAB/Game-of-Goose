@@ -15,7 +15,7 @@ namespace Game_of_Goose
         {
             string[] print = new string[3];
             print[0] = $"{Diceroll[1]}+{Diceroll[2]}: {StartLocation} ->";
-            print[1] = $"{EndLocation.Name}.";
+            print[1] = $"{EndLocation.Type}.";
 
             return print;
         }

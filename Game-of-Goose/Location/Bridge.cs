@@ -6,21 +6,20 @@ using System.Threading.Tasks;
 
 namespace Game_of_Goose.Location
 {
-    public class Inn : ILocation
+    public class Bridge : ILocation
     {
-        public Inn(int id)
+        public Bridge(int id)
         {
             Id = id;
-            Type = LocationType.Inn;
+            Type = LocationType.Well;
         }
 
         public int Id { get; set; }
-
         public LocationType Type { get; private set; }
 
         public void OnPlayerLanded(Player player, int diceroll)
         {
-            player.SkipTurns = 1;
+            throw new NotImplementedException();
         }
     }
 }

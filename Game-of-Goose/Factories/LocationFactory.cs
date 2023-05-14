@@ -1,9 +1,4 @@
 ﻿using Game_of_Goose.Location;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Game_of_Goose.Factories
 {
@@ -16,12 +11,15 @@ namespace Game_of_Goose.Factories
             {
                 case LocationType.Default:
                     return new RegularLocation(id);
+
                 case LocationType.Goose:
-                    return new Goose(id, "");
+                    return new Goose(id);
+
                 case LocationType.Inn:
-                    return new Inn(id, "");
-                //case LocationType.Prison:
-                //    throw new NotImplementedException();
+                    return new Inn(id);
+
+                case LocationType.Prison:
+                    return new Prison(id);
                 //case LocationType.Well:
                 //    throw new NotImplementedException();
                 //case LocationType.Maze:

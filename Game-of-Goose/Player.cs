@@ -18,18 +18,30 @@ namespace Game_of_Goose
         public ILocation Location { get; set; }
         public bool InWell { get; set; }
         public int SkipTurns { get; set; }
+        public int lastDiceroll { get; set; }
+        public bool IsDirectionForward { get; set; }
 
         public void MovePlayer(int diceroll)
         {
-
+            //check skipturns
+            //method checkskipturn methode is bool
+            lastDiceroll= diceroll;
             int locationId = Location.Id + diceroll;
             ILocation newLocation = Gameboard.Instance().GetLocation(locationId);
-            newLocation.OnPlayerLanded(this);
             Location = newLocation;
+            Location.OnPlayerLanded(this);
 
                 }
 
         public void SetPlayerPosition(int position)
         { }
+        public bool DoesPlayerSkipTurn()
+        {
+            if (SkipTurns > 0)
+            {
+                SkipTurns =-1
+
+            }
+        }
     }
 }

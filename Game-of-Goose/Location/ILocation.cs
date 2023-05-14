@@ -3,8 +3,6 @@
     public interface ILocation
     {
         int Id { get; set; }
-        string Name { get; set; }
-
         LocationType Type { get; }
 
         void OnPlayerLanded(Player player);

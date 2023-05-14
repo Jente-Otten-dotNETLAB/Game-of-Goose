@@ -15,7 +15,6 @@ namespace GameOfGoose.Test
         public void WhenPlayerMoveOnRegularLocation_ThenLogLocationNumber(int diceroll, int startPosition, int expectedLocation)
         {
             // Arrange
-            var board = Gameboard.Instance();
             var player = new Player(1, "Player 1", startPosition);
             // Act
             player.MovePlayer(diceroll);
@@ -23,7 +22,8 @@ namespace GameOfGoose.Test
             Assert.That(player.Location.Id, Is.EqualTo(expectedLocation));
         }
 
-        [TestCase(12, 2, 24)]
+        [TestCase(5, 0, 10)]
+        [TestCase(12, 2, 26)]
         public void WhenPlayerMoveOnGooseLocation_ThenLogLocationNumber(int diceroll, int startPosition, int expectedLocation)
         {
             // Arrange
@@ -34,10 +34,38 @@ namespace GameOfGoose.Test
             Assert.That(player.Location.Id, Is.EqualTo(expectedLocation));
         }
 
-        // wat als we op een goose komen,
+        [TestCase(4, 10, 22)]
+        [TestCase(5, 22, 32)]
+        public void WhenPlayerMovesToGooseLocationComingFromGooseLocation_ThenLogLocationNumber(int diceroll, int startPosition, int expectedLocation)
+        {
+            // Arrange
+            var player = new Player(1, "Player 1", startPosition);
+            // Act
+            player.MovePlayer(diceroll);
+            // Assert
+            Assert.That(player.Location.Id, Is.EqualTo(expectedLocation));
+        }
 
-        // wat als we na een goose weer op een goose komen
-
-        // wat krijgen we als we terug aan het gaan zijn en op een goose komen.
+        //moving Backward, Ik gebruik hier een negatieve diceroll voor, is dit correct?
+        [TestCase(-4, 63, 55)]
+        public void WhenPlayerMovingBackwardLandsOnGooseLocation_ThenLogLocationNumber(int diceroll, int startPosition, int expectedLocation)
+        {
+            // Arrange
+            var player = new Player(1, "Player 1", startPosition);
+            // Act
+            player.MovePlayer(diceroll);
+            // Assert
+            Assert.That(player.Location.Id, Is.EqualTo(expectedLocation));
+        }
+        [TestCase(7, 12)]
+        public void WhenPlayerMovesToInn_ThenPlayerSkipturnsChangesTo1(int diceroll, int startPosition)
+        {
+            //arrange
+            var player = new Player(1, "Player 1", startPosition);
+            //act
+            player.MovePlayer(diceroll);
+            //assert
+            Assert.That(player.SkipTurns, Is.EqualTo(1));
+        }
     }
 }

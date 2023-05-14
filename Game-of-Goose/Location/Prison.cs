@@ -6,21 +6,22 @@ using System.Threading.Tasks;
 
 namespace Game_of_Goose.Location
 {
-    public class Inn : ILocation
+    
+    public class Prison : ILocation
     {
-        public Inn(int id)
+        public Prison(int id)
         {
             Id = id;
-            Type = LocationType.Inn;
+            Type = LocationType.Prison;
         }
 
         public int Id { get; set; }
 
         public LocationType Type { get; private set; }
 
-        public void OnPlayerLanded(Player player, int diceroll)
+        public void OnPlayerLanded(Player player)
         {
-            player.SkipTurns = 1;
+            player.SkipTurns = 3;
         }
     }
 }

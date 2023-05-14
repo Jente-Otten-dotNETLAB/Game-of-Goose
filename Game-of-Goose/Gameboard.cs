@@ -17,10 +17,11 @@ namespace Game_of_Goose
         private int[] goose = new int[] { 5, 9, 14, 18, 23, 27, 23, 36, 41, 45, 50, 54, 59 };
 
         private int well = 31;
+        private int inn = 19;
 
         private Gameboard()
         {
-            for (int i = 1; i < 64; i++)
+            for (int i = 0; i < 64; i++)
             {
                 //TODO : Change to Switch case
                 if (i == bridge)
@@ -34,6 +35,10 @@ namespace Game_of_Goose
                 else if (i == end)
                 {
                     Locations.Add(_factory.CreateLocation(LocationType.End, i));
+                }
+                else if (i == inn)
+                {
+                    Locations.Add(_factory.CreateLocation(LocationType.Inn, i));
                 }
                 else if (goose.Contains(i))
                 {

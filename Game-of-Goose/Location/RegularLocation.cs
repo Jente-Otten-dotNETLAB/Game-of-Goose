@@ -5,15 +5,13 @@
         public RegularLocation(int id)
         {
             Id = id;
-            Name = "";
             Type = LocationType.Default;
         }
 
         public int Id { get; set; }
-        public string Name { get; set; }
         public LocationType Type { get; private set; }
 
-        public void OnPlayerLanded(Player player)
+        public void OnPlayerLanded(Player player,int diceroll)
         {
             Console.WriteLine($"player landed on {Id}");
         }
