@@ -4,7 +4,7 @@ namespace Game_of_Goose
 {
     public class Player
     {
-        public Player(int id, string name, int startLocation=0)
+        public Player(int id, string name, int startLocation = 0)
         {
             Id = id;
             Name = name;
@@ -23,25 +23,36 @@ namespace Game_of_Goose
 
         public void MovePlayer(int diceroll)
         {
-            //check skipturns
-            //method checkskipturn methode is bool
-            lastDiceroll= diceroll;
-            int locationId = Location.Id + diceroll;
-            ILocation newLocation = Gameboard.Instance().GetLocation(locationId);
-            Location = newLocation;
-            Location.OnPlayerLanded(this);
 
-                }
+            if (DoesPlayerSkipTurn() is false)
+            {
+                lastDiceroll = diceroll;
+                int locationId = Location.Id + diceroll;
+                ILocation newLocation = Gameboard.Instance().GetLocation(locationId);
+                Location = newLocation;
+                Location.OnPlayerLanded(this);
+            }
+        }
 
         public void SetPlayerPosition(int position)
         { }
+
         public bool DoesPlayerSkipTurn()
         {
             if (SkipTurns > 0)
             {
-                SkipTurns =-1
-
+                SkipTurns = -1;
+                return true;
             }
+            return false;
+        }
+        public bool IsPlayerPastEnd(int locationId)
+        {
+            if (locationId > 63)
+            {
+//aantal achterwaarts te gaan = 63 - originele locatie.id 
+            }
+
         }
     }
 }
