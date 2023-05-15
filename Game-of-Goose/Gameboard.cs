@@ -5,19 +5,19 @@ namespace Game_of_Goose
 {
     public class Gameboard
     {
-
         // Singleton
         private static Gameboard _instance;
+
         private ILocationFactory _factory = new LocationFactory();
 
         private int bridge = 6;
-
         private int end = 63;
-
         private int[] goose = new int[] { 5, 9, 14, 18, 23, 27, 23, 36, 41, 45, 50, 54, 59 };
-
         private int well = 31;
         private int inn = 19;
+        private int prison = 52;
+        private int death = 58;
+        private int maze = 42;
 
         private Gameboard()
         {
@@ -44,6 +44,18 @@ namespace Game_of_Goose
                 {
                     Locations.Add(_factory.CreateLocation(LocationType.Goose, i));
                 }
+                else if (i == prison)
+                {
+                    Locations.Add(_factory.CreateLocation(LocationType.Prison, i));
+                }
+                else if (i == death)
+                {
+                    Locations.Add(_factory.CreateLocation(LocationType.Death, i));
+                }
+                else if (i == maze)
+                {
+                    Locations.Add(_factory.CreateLocation(LocationType.Maze, i));
+                }
                 else
                 {
                     Locations.Add(_factory.CreateLocation(LocationType.Default, i));
@@ -62,10 +74,9 @@ namespace Game_of_Goose
             return _instance;
         }
 
-        internal ILocation GetLocation(int locationId)
+        public ILocation GetLocation(int locationId)
         {
-            return Locations.First(x=>x.Id==locationId);
+            return Locations.First(x => x.Id == locationId);
         }
-        //TODO andere vakjes toevoegen
     }
 }

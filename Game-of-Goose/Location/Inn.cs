@@ -18,9 +18,10 @@ namespace Game_of_Goose.Location
 
         public LocationType Type { get; private set; }
 
-        public void OnPlayerLanded(Player player, int diceroll)
+        public void OnPlayerLanded(Player player)
         {
             player.SkipTurns = 1;
         }
+
     }
 }

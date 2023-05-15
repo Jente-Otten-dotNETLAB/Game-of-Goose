@@ -6,21 +6,22 @@ using System.Threading.Tasks;
 
 namespace Game_of_Goose.Location
 {
-    public class Bridge : ILocation
+    public class Maze : ILocation
     {
-        public Bridge(int id)
+        public Maze(int id)
         {
             Id = id;
-            Type = LocationType.Well;
+            Type = LocationType.Maze;
         }
 
         public int Id { get; set; }
+
         public LocationType Type { get; private set; }
 
         public void OnPlayerLanded(Player player)
         {
-           player.Location = Gameboard.Instance().GetLocation(12);
-
+            player.Location = Gameboard.Instance().GetLocation(39);
         }
     }
 }
+

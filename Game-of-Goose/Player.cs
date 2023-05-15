@@ -11,6 +11,8 @@ namespace Game_of_Goose
             Location = Gameboard.Instance().GetLocation(startLocation);
             InWell = false;
             SkipTurns = 0;
+            IsDirectionForward = true;
+            IsWinner = false;
         }
 
         public int Id { get; set; }
@@ -20,22 +22,30 @@ namespace Game_of_Goose
         public int SkipTurns { get; set; }
         public int lastDiceroll { get; set; }
         public bool IsDirectionForward { get; set; }
+        public bool IsWinner { get; set; }
 
         public void MovePlayer(int diceroll)
         {
-
-            if (DoesPlayerSkipTurn() is false)
+            if (DoesPlayerSkipTurn() is false && InWell is false)
             {
                 lastDiceroll = diceroll;
-                int locationId = Location.Id + diceroll;
+                int locationId;
+                if (IsDirectionForward == true)
+                {
+                    locationId = Location.Id + diceroll;
+                }
+                else
+                {
+                    locationId = Location.Id - diceroll;
+                }
+                locationId = IsPlayerPastEnd(locationId);
+                //method is player past
                 ILocation newLocation = Gameboard.Instance().GetLocation(locationId);
                 Location = newLocation;
                 Location.OnPlayerLanded(this);
             }
         }
 
-        public void SetPlayerPosition(int position)
-        { }
 
         public bool DoesPlayerSkipTurn()
         {
@@ -46,13 +56,17 @@ namespace Game_of_Goose
             }
             return false;
         }
-        public bool IsPlayerPastEnd(int locationId)
+
+        public int IsPlayerPastEnd(int locationId)
         {
             if (locationId > 63)
             {
-//aantal achterwaarts te gaan = 63 - originele locatie.id 
-            }
+                int restOfMovement = locationId - 63;
+                locationId = 63 - restOfMovement;
 
-        }
+                IsDirectionForward = false;
+            }
+            return locationId;
+        }   
     }
 }

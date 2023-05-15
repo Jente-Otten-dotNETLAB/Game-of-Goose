@@ -18,5 +18,31 @@
         public int DiceMaximum { get; set; }
         public int DiceThrows { get; set; }
         public bool GameEnded { get; set; }
+
+        public void PlayGame()
+        {
+            while (GameEnded is false)
+            {
+                foreach (Player player in Players)
+                {
+                    if (player.IsWinner is false)
+                    {
+                        int diceroll = RollDice();
+                        player.MovePlayer(diceroll);
+                        if (player.Location.Id == FinalLocation)
+                        {
+                            GameEnded = true;
+                            player.IsWinner = true;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+
+        private int RollDice()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
