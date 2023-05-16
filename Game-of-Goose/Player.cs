@@ -20,32 +20,34 @@ namespace Game_of_Goose
         public ILocation Location { get; set; }
         public bool InWell { get; set; }
         public int SkipTurns { get; set; }
-        public int lastDiceroll { get; set; }
+        public int LastDiceRoll { get; set; }
         public bool IsDirectionForward { get; set; }
         public bool IsWinner { get; set; }
+        public string Message { get; set; }
 
-        public void MovePlayer(int diceroll)
+        public void MovePlayer(Dice dice)
         {
-            if (DoesPlayerSkipTurn() is false && InWell is false)
+            int locationId;
+            if (DoesPlayerSkipTurn() is true)
             {
-                lastDiceroll = diceroll;
-                int locationId;
-                if (IsDirectionForward == true)
-                {
-                    locationId = Location.Id + diceroll;
-                }
-                else
-                {
-                    locationId = Location.Id - diceroll;
-                }
-                locationId = IsPlayerPastEnd(locationId);
-                //method is player past
-                ILocation newLocation = Gameboard.Instance().GetLocation(locationId);
-                Location = newLocation;
-                Location.OnPlayerLanded(this);
+                Message = $"skip turn: s{Location.Id}";
+                return;
             }
-        }
+            if (InWell is true)
+            {
+                Message = $"stuck in well: s{Location.Id}";
+                return;
+            }
+            Message = $"{dice.DiceOne}+{dice.DiceTwo}:";
+            LastDiceRoll = dice.DiceTotal;
+            locationId = GetLocationId(LastDiceRoll);
+            locationId = IsPlayerPastEnd(locationId);
+            Location = Gameboard.Instance().GetLocation(locationId);
+            Message += $"s{Location.Id}";
+            Location.OnPlayerLanded(this);
 
+            IsDirectionForward = true;
+        }
 
         public bool DoesPlayerSkipTurn()
         {
@@ -67,6 +69,21 @@ namespace Game_of_Goose
                 IsDirectionForward = false;
             }
             return locationId;
-        }   
+        }
+
+        public int GetLocationId(int diceRoll)
+        {
+            int locationId;
+            if (IsDirectionForward == true)
+            {
+                locationId = Location.Id + diceRoll;
+            }
+            else
+            {
+                locationId = Location.Id - diceRoll;
+            }
+            
+            return locationId;
+        }
     }
 }

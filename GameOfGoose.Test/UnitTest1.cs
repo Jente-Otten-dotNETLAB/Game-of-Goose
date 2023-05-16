@@ -1,5 +1,6 @@
 using Game_of_Goose;
 using Game_of_Goose.Location;
+using System.Numerics;
 
 namespace GameOfGoose.Test
 {
@@ -14,8 +15,10 @@ namespace GameOfGoose.Test
         {
             // Arrange
             var player = new Player(1, "Player 1", startPosition);
+            Dice dice = new Dice();
+            dice.DiceTotal = diceroll;
             // Act
-            player.MovePlayer(diceroll);
+            player.MovePlayer(dice);
             // Assert
             Assert.That(player.Location.Id, Is.EqualTo(expectedLocation));
         }
@@ -26,8 +29,10 @@ namespace GameOfGoose.Test
         {
             // Arrange
             var player = new Player(1, "Player 1", startPosition);
+            Dice dice = new Dice();
+            dice.DiceTotal = diceroll;
             // Act
-            player.MovePlayer(diceroll);
+            player.MovePlayer(dice);
             // Assert
             Assert.That(player.Location.Id, Is.EqualTo(expectedLocation));
         }
@@ -38,8 +43,10 @@ namespace GameOfGoose.Test
         {
             // Arrange
             var player = new Player(1, "Player 1", startPosition);
+            Dice dice = new Dice();
+            dice.DiceTotal = diceroll;
             // Act
-            player.MovePlayer(diceroll);
+            player.MovePlayer(dice);
             // Assert
             Assert.That(player.Location.Id, Is.EqualTo(expectedLocation));
         }
@@ -49,8 +56,10 @@ namespace GameOfGoose.Test
         {
             // Arrange
             var player = new Player(1, "Player 1", startPosition);
+            Dice dice = new Dice();
+            dice.DiceTotal = diceroll;
             // Act
-            player.MovePlayer(diceroll);
+            player.MovePlayer(dice);
             // Assert
             Assert.That(player.Location.Id, Is.EqualTo(expectedLocation));
         }
@@ -60,8 +69,10 @@ namespace GameOfGoose.Test
         {
             //arrange
             var player = new Player(1, "Player 1", startPosition);
+            Dice dice = new Dice();
+            dice.DiceTotal = diceroll;
             //act
-            player.MovePlayer(diceroll);
+            player.MovePlayer(dice);
             //assert
             Assert.That(player.SkipTurns, Is.EqualTo(1));
         }
@@ -72,8 +83,10 @@ namespace GameOfGoose.Test
         {
             //arrange
             var player = new Player(1, "Player 1", startPosition);
+            Dice dice = new Dice();
+            dice.DiceTotal = diceroll;
             //act
-            player.MovePlayer(diceroll);
+            player.MovePlayer(dice);
             //assert
             Assert.That(player.SkipTurns, Is.EqualTo(3));
         }
@@ -84,8 +97,10 @@ namespace GameOfGoose.Test
         {
             //arrange
             var player = new Player(1, "Player 1", startPosition);
+            Dice dice = new Dice();
+            dice.DiceTotal = diceroll;
             //act
-            player.MovePlayer(diceroll);
+            player.MovePlayer(dice);
             //assert
             Assert.That(player.Location.Id, Is.EqualTo(expectedlocation));
         }
@@ -95,8 +110,10 @@ namespace GameOfGoose.Test
         {
             //arrange
             var player = new Player(1, "Player 1", startPosition);
+            Dice dice = new Dice();
+            dice.DiceTotal = diceroll;
             //act
-            player.MovePlayer(diceroll);
+            player.MovePlayer(dice);
             //assert
             Assert.That(player.Location.Id, Is.EqualTo(expectedlocation));
         }
@@ -107,8 +124,10 @@ namespace GameOfGoose.Test
         {
             //arrange
             var player = new Player(1, "Player 1", startPosition);
+            Dice dice = new Dice();
+            dice.DiceTotal = diceroll;
             //act
-            player.MovePlayer(diceroll);
+            player.MovePlayer(dice);
             //assert
             Assert.That(player.Location.Id, Is.EqualTo(expectedlocation));
         }
@@ -119,8 +138,10 @@ namespace GameOfGoose.Test
         {
             //arrange
             var player = new Player(1, "Player 1", startPosition);
+            Dice dice = new Dice();
+            dice.DiceTotal = diceroll;
             //act
-            player.MovePlayer(diceroll);
+            player.MovePlayer(dice);
             //assert
             Assert.That(player.Location.Id, Is.EqualTo(39));
         }
@@ -130,8 +151,10 @@ namespace GameOfGoose.Test
         {
             //arrange
             var player = new Player(1, "Player 1", startPosition);
+            Dice dice = new Dice();
+            dice.DiceTotal = diceroll;
             //act
-            player.MovePlayer(diceroll);
+            player.MovePlayer(dice);
             //assert
             Assert.That(player.Location.Id, Is.EqualTo(0));
         }
@@ -142,8 +165,10 @@ namespace GameOfGoose.Test
             //arrange
             var player = new Player(1, "Player 1", startPosition);
             player.InWell = true;
+            Dice dice = new Dice();
+            dice.DiceTotal = diceroll;
             //act
-            player.MovePlayer(diceroll);
+            player.MovePlayer(dice);
             //assert
             Assert.That(player.Location.Id, Is.EqualTo(startPosition));
         }
@@ -158,8 +183,10 @@ namespace GameOfGoose.Test
             playerTwo.InWell = true;
            var well = (Well)Gameboard.Instance().GetLocation(31);
             well.PlayerInWell = playerTwo;
+            Dice dice = new Dice();
+            dice.DiceTotal = dicerollPlayerOne;
             //act
-            playerOne.MovePlayer(dicerollPlayerOne);
+            playerOne.MovePlayer(dice);
             //assert
             Assert.That(playerTwo.InWell, Is.False);
            
@@ -175,8 +202,10 @@ namespace GameOfGoose.Test
             playerTwo.InWell = true;
             var well = (Well)Gameboard.Instance().GetLocation(31);
             well.PlayerInWell = playerTwo;
+            Dice dice = new Dice();
+            dice.DiceTotal = dicerollPlayerOne;
             //act
-            playerOne.MovePlayer(dicerollPlayerOne);
+            playerOne.MovePlayer(dice);
             //assert
             Assert.That(playerOne.InWell, Is.True);
             Assert.That(well.PlayerInWell, Is.EqualTo(playerOne));
@@ -187,8 +216,10 @@ namespace GameOfGoose.Test
         {
             // Arrange
             var player = new Player(1, "Player 1", startPosition);
-            // Act
-            player.MovePlayer(diceroll);
+            Dice dice = new Dice();
+            dice.DiceTotal = diceroll;
+            //act
+            player.MovePlayer(dice);
             // Assert
             Assert.That(player.IsWinner, Is.True);
         }

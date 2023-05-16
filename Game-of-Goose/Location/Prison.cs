@@ -19,8 +19,10 @@ namespace Game_of_Goose.Location
 
         public LocationType Type { get; private set; }
 
+
         public void OnPlayerLanded(Player player)
         {
+            player.Message += ":Prison";
             player.SkipTurns = 3;
         }
     }

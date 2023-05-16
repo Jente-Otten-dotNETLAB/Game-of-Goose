@@ -12,15 +12,18 @@ namespace Game_of_Goose.Location
         {
             Id = id;
             Type = LocationType.Death;
+
         }
 
         public int Id { get; set; }
 
         public LocationType Type { get; private set; }
 
+
         public void OnPlayerLanded(Player player)
         {
             player.Location = Gameboard.Instance().GetLocation(0);
+            player.Message += ":Death";
         }
     }
 }

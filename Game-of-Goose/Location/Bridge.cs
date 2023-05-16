@@ -17,9 +17,11 @@ namespace Game_of_Goose.Location
         public int Id { get; set; }
         public LocationType Type { get; private set; }
 
+
         public void OnPlayerLanded(Player player)
         {
-           player.Location = Gameboard.Instance().GetLocation(12);
+            player.Location = Gameboard.Instance().GetLocation(12);
+            player.Message += ":bridge to s12";
 
         }
     }

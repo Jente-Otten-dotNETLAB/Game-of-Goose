@@ -11,9 +11,9 @@
         public int Id { get; set; }
         public LocationType Type { get; private set; }
 
+
         public void OnPlayerLanded(Player player)
         {
-            Console.WriteLine($"player landed on {Id}");
         }
     }
 }

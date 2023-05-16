@@ -18,9 +18,11 @@ namespace Game_of_Goose.Location
 
         public LocationType Type { get; private set; }
 
+
         public void OnPlayerLanded(Player player)
         {
             player.Location = Gameboard.Instance().GetLocation(39);
+            player.Message += "-> s39";
         }
     }
 }

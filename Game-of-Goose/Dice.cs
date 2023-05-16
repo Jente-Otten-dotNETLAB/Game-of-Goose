@@ -15,6 +15,7 @@ namespace Game_of_Goose
             DiceTwo = r.Next(1,6);
             DiceTotal = DiceOne+DiceTwo;
         }
+        
 
         public int DiceOne { get; set; }
         public int DiceTwo { get; set; }

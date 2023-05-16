@@ -6,9 +6,6 @@
         {
             Players = players;
             FinalLocation = 63;
-            DiceMinimum = 1;
-            DiceMaximum = 6;
-            DiceThrows = 2;
             GameEnded = false;
         }
 
@@ -21,28 +18,41 @@
 
         public void PlayGame()
         {
+            //TODO changebackto1
+            int turnId = 2;
             while (GameEnded is false)
             {
-                foreach (Player player in Players)
+
+                Console.Write("\n[Press ENTER to continue the next round]");
+
+                while (Console.ReadKey().Key != ConsoleKey.Enter)
                 {
-                    if (player.IsWinner is false)
-                    {
-                        int diceroll = RollDice();
-                        player.MovePlayer(diceroll);
-                        if (player.Location.Id == FinalLocation)
-                        {
-                            GameEnded = true;
-                            player.IsWinner = true;
-                            break;
-                        }
-                    }
                 }
+                Turn turn = new Turn(turnId, Players);
+                turn.PlayTurn();
+                turnId += 1;
+               GameEnded = CheckForWinner();
+
             }
+            
+            
+        }
+        public bool CheckForWinner()
+        {
+            foreach (var player in Players)
+            {
+                if (player.Location.Id == 63)
+                {
+                    player.IsWinner = true;
+                    GameEnded = true;
+                    return true;
+                }
+              
+            }
+            return false;
         }
 
-        private int RollDice()
-        {
-            throw new NotImplementedException();
-        }
+       
+       
     }
 }

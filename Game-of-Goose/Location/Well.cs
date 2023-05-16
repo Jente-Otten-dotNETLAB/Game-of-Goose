@@ -20,6 +20,7 @@ namespace Game_of_Goose.Location
         public LocationType Type { get; private set; }
         public Player? PlayerInWell { get; set; }
 
+
         public void OnPlayerLanded(Player player)
         {
             if (PlayerInWell != null)
@@ -29,7 +30,7 @@ namespace Game_of_Goose.Location
             }
             PlayerInWell = player;
             player.InWell = true;
-            
+            player.Message += ":well";
         }
     }
 }

@@ -4,53 +4,73 @@ namespace Game_of_Goose
 {
     public class Turn
     {
-        public Turn(Player player)
+        public Turn(int id, List<Player> players)
         {
-            Player = player;
-            Dice = new Dice();
-            StartLocation = player.Location;
-            EndLocation = null;
-            Narration = new string[3]
-                {
-                $"{player.Name} is at {player.Location.Id}",
-                $"{player.Name} rolled a {Dice.DiceOne} and a {Dice.DiceTwo}",
-                ""
-            };
+            Id = id;
+            Players = players;
         }
 
-        public Player Player { get; set; }
+        public int Id { get; set; }
+        public List<Player> Players { get; set; }
         public Dice Dice { get; set; }
-        public ILocation StartLocation { get; set; }
-        public ILocation? EndLocation { get; set; }
-        public string[] Narration { get; set; } = new string[3];
 
-        public void LogTurn()
-        {
-            Console.WriteLine(Narration[1]);
-            Console.WriteLine(Narration[2]);
-            Console.WriteLine(Narration[3]);
-        }
+
 
         public void PlayTurn()
         {
-            Player.MovePlayer(Dice.DiceOne + Dice.DiceTwo);
-            Narration[3] = $"{Player.Name} ends it's turn at {Player.Location.Id}, the {Player.Location.Type}";
+            foreach (var player in Players)
+            {
+            Dice dice = new Dice();
+                if (player.Location.Id == 0 && dice.DiceTotal ==9)
+                {
+                    if (dice.DiceOne == 6 || dice.DiceOne ==3)
+                    {
+                        player.Location = Gameboard.Instance().GetLocation(53);
+                        player.Message += "-> s53";
+                    }
+                    else
+                    {
+                        player.Location = Gameboard.Instance().GetLocation(26);
+                        player.Message += "-> s26";
+                    }
+                    return;
+                }
+                player.MovePlayer(dice);
+                if (player.Location.Id == 63)
+                {
+                    player.IsWinner = true;
+                }
+            }
+         
+            LogTurn();
         }
 
-        // hoe moet een beurt er uit zien?
-        //            naam 1                   naam 2                naam 3                naam 4
-        //Turn TurnId
-        //    roll1 + roll2 Location1 -> Location2                  3 + 5: 8               4+2: 6->12
-        //                                                                                 The bridge
-        //[PRESS ENTER TO PLAY TURN {turnId + 1}]
+        public void LogTurn()
+        {
+            string line = new string('-', 100);
+            string spaces = new string(' ', 50);
 
-        // het verschil nog maken tussen een beurt en een ronde
+            string names = "";
+            string turnId = spaces + "Turn " + Id + ": ";
+            string Movement = "";
+            foreach (var player in Players)
+            {
 
-        // een ronde is een beurt voor elke speler
-        // een beurt is een beurt voor 1 speler
-        // een ronde is dus een lijst van beurten
-        // een beurt is een lijst van worpen
-        // een worp is een lijst van dobbelstenen
-        // een dobbelsteen is een getal
+                names += player.Name + new string(' ', 25 - player.Name.Length);
+                Movement += player.Message + new string(' ', 25 - player.Message.Length);
+               
+            }
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine(turnId);
+            Console.ForegroundColor = ConsoleColor.White;
+
+            Console.WriteLine(line);
+            Console.WriteLine(names);
+            Console.WriteLine(Movement);
+        }
+
+
+
+
     }
 }

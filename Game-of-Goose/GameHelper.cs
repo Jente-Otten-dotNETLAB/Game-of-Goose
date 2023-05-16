@@ -13,14 +13,11 @@ namespace Game_of_Goose
             {
                 Console.WriteLine("please enter a number between 2 and 4");
                 bool TryParse = int.TryParse(Console.ReadLine(), out numberOfPlayers);
-                Console.WriteLine(numberOfPlayers);
-
                 if ((numberOfPlayers >= 2) && (numberOfPlayers <= 4))
                 { succes = true; }
             }
             return numberOfPlayers;
         }
-        // move to Factory
         public List<Player> CreatePlayers(int numberOfPlayers)
         {
             List<Player> list = new();
@@ -32,6 +29,19 @@ namespace Game_of_Goose
                 list.Add(new Player(i, name));
             }
             return list;
+        }
+        
+        public Game CreateGame()
+        {
+            var getal = GetPlayerAmount();
+            var players = CreatePlayers(getal);
+            var game = new Game(players);
+            return game;
+        }
+        public void StartGame()
+        {
+            var game = CreateGame();
+            game.PlayGame();
         }
 
 
