@@ -11,18 +11,13 @@
 
         public List<Player> Players { get; set; }
         public int FinalLocation { get; set; }
-        public int DiceMinimum { get; set; }
-        public int DiceMaximum { get; set; }
-        public int DiceThrows { get; set; }
         public bool GameEnded { get; set; }
 
         public void PlayGame()
         {
-            //TODO changebackto1
-            int turnId = 2;
+            int turnId = 1;
             while (GameEnded is false)
             {
-
                 Console.Write("\n[Press ENTER to continue the next round]");
 
                 while (Console.ReadKey().Key != ConsoleKey.Enter)
@@ -31,12 +26,10 @@
                 Turn turn = new Turn(turnId, Players);
                 turn.PlayTurn();
                 turnId += 1;
-               GameEnded = CheckForWinner();
-
+                GameEnded = CheckForWinner();
             }
-            
-            
         }
+
         public bool CheckForWinner()
         {
             foreach (var player in Players)
@@ -47,12 +40,8 @@
                     GameEnded = true;
                     return true;
                 }
-              
             }
             return false;
         }
-
-       
-       
     }
 }

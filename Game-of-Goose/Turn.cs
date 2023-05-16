@@ -21,24 +21,10 @@ namespace Game_of_Goose
             foreach (var player in Players)
             {
             Dice dice = new Dice();
-                if (player.Location.Id == 0 && dice.DiceTotal ==9)
+               
+                else
                 {
-                    if (dice.DiceOne == 6 || dice.DiceOne ==3)
-                    {
-                        player.Location = Gameboard.Instance().GetLocation(53);
-                        player.Message += "-> s53";
-                    }
-                    else
-                    {
-                        player.Location = Gameboard.Instance().GetLocation(26);
-                        player.Message += "-> s26";
-                    }
-                    return;
-                }
-                player.MovePlayer(dice);
-                if (player.Location.Id == 63)
-                {
-                    player.IsWinner = true;
+                    player.MovePlayer(dice);
                 }
             }
          
@@ -49,7 +35,7 @@ namespace Game_of_Goose
         {
             string line = new string('-', 100);
             string spaces = new string(' ', 50);
-
+            string ExtraSpacerInCaseOfNewLine = new string(' ', 25);
             string names = "";
             string turnId = spaces + "Turn " + Id + ": ";
             string Movement = "";
@@ -57,8 +43,18 @@ namespace Game_of_Goose
             {
 
                 names += player.Name + new string(' ', 25 - player.Name.Length);
+                if (player.Message.Length >= 25)
+                {
+                    
+                    Movement += player.Message + "\n" + ExtraSpacerInCaseOfNewLine;
+                }
+                else
+                {
                 Movement += player.Message + new string(' ', 25 - player.Message.Length);
-               
+                }
+                ExtraSpacerInCaseOfNewLine += new string(' ', 25);
+                player.Message = "";
+                
             }
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine(turnId);

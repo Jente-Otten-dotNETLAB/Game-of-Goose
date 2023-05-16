@@ -8,6 +8,15 @@ namespace Game_of_Goose
         // Singleton
         private static Gameboard _instance;
 
+        public static Gameboard Instance()
+        {
+            if (_instance == null)
+            {
+                _instance = new Gameboard();
+            }
+            return _instance;
+        }
+
         private ILocationFactory _factory = new LocationFactory();
 
         private const int bridge = 6;
@@ -17,7 +26,7 @@ namespace Game_of_Goose
         private const int prison = 52;
         private const int death = 58;
         private const int maze = 42;
-        private int[] goose = new int[] { 5, 9, 14, 18, 23, 27, 23, 36, 41, 45, 50, 54, 59 };
+        private int[] goose = new int[] { 5, 9, 14, 18, 23, 27, 32, 36, 41, 45, 50, 54, 59 };
 
         private Gameboard()
         {
@@ -64,58 +73,10 @@ namespace Game_of_Goose
                             break;
                     }
                 }
-                ////TODO : Change to Switch case
-                //if (i == bridge)
-                //{
-                //    Locations.Add(_factory.CreateLocation(LocationType.Bridge, i));
-                //}
-                //else if (i == well)
-                //{
-                //    Locations.Add(_factory.CreateLocation(LocationType.Well, i));
-                //}
-                //else if (i == end)
-                //{
-                //    Locations.Add(_factory.CreateLocation(LocationType.End, i));
-                //}
-                //else if (i == inn)
-                //{
-                //    Locations.Add(_factory.CreateLocation(LocationType.Inn, i));
-                //}
-                //else if (hihi.Contains(i))
-                //{
-                //    Locations.Add(_factory.CreateLocation(LocationType.Goose, i));
-                //}
-                //else if (i == prison)
-                //{
-                //    Locations.Add(_factory.CreateLocation(LocationType.Prison, i));
-                //}
-                //else if (i == death)
-                //{
-                //    Locations.Add(_factory.CreateLocation(LocationType.Death, i));
-                //}
-                //else if (i == maze)
-                //{
-                //    Locations.Add(_factory.CreateLocation(LocationType.Maze, i));
-                //}
-                //else
-                //{
-                //    Locations.Add(_factory.CreateLocation(LocationType.Default, i));
-                //}
             }
         }
 
         public List<ILocation> Locations { get; set; } = new List<ILocation>();
-        public int[] Goose { get => goose; set => goose = value; }
-        public int[] Goose1 { get => goose; set => goose = value; }
-
-        public static Gameboard Instance()
-        {
-            if (_instance == null)
-            {
-                _instance = new Gameboard();
-            }
-            return _instance;
-        }
 
         public ILocation GetLocation(int locationId)
         {

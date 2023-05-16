@@ -25,6 +25,10 @@ namespace Game_of_Goose
             {
                 Console.WriteLine("how is player " + i + " called?");
                 string name = Console.ReadLine();
+                if (name.Length >= 20)
+                {
+                    name = name.Substring(0, 20);
+                }
                 Console.WriteLine();
                 list.Add(new Player(i, name));
             }
