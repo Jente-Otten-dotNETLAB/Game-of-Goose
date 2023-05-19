@@ -1,6 +1,4 @@
-﻿using Game_of_Goose.Location;
-
-namespace Game_of_Goose
+﻿namespace Game_of_Goose
 {
     public class Turn
     {
@@ -14,20 +12,14 @@ namespace Game_of_Goose
         public List<Player> Players { get; set; }
         public Dice Dice { get; set; }
 
-
-
         public void PlayTurn()
         {
             foreach (var player in Players)
             {
-            Dice dice = new Dice();
-               
-                else
-                {
-                    player.MovePlayer(dice);
-                }
+                Dice dice = new Dice();
+                player.MovePlayer(dice);
             }
-         
+
             LogTurn();
         }
 
@@ -41,20 +33,17 @@ namespace Game_of_Goose
             string Movement = "";
             foreach (var player in Players)
             {
-
                 names += player.Name + new string(' ', 25 - player.Name.Length);
                 if (player.Message.Length >= 25)
                 {
-                    
                     Movement += player.Message + "\n" + ExtraSpacerInCaseOfNewLine;
                 }
                 else
                 {
-                Movement += player.Message + new string(' ', 25 - player.Message.Length);
+                    Movement += player.Message + new string(' ', 25 - player.Message.Length);
                 }
                 ExtraSpacerInCaseOfNewLine += new string(' ', 25);
                 player.Message = "";
-                
             }
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine(turnId);
@@ -64,9 +53,5 @@ namespace Game_of_Goose
             Console.WriteLine(names);
             Console.WriteLine(Movement);
         }
-
-
-
-
     }
 }

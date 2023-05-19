@@ -15,9 +15,7 @@
 
         public void OnPlayerLanded(Player player)
         {
-            int locationId = player.CalculateLocationId(player.LastDiceRoll);
-            locationId = player.CalculateBackwardMovementIfPlayerMovedPast63(locationId);
-            
+            int locationId = player.CheckNewLocationBasedOnRoll(player.LastDice);
             player.Location = Gameboard.Instance().GetLocation(locationId);
            
             player.Message += $"->s{player.Location.Id}";

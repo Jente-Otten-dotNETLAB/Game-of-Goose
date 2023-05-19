@@ -38,7 +38,7 @@ namespace GameOfGoose.Test
         }
 
         [TestCase(4, 10, 22)]
-        [TestCase(5, 22, 32)]
+        [TestCase(5, 22, 37)]
         public void WhenPlayerMovesToGooseLocationComingFromGooseLocation_ThenLogLocationNumber(int diceroll, int startPosition, int expectedLocation)
         {
             // Arrange
@@ -51,7 +51,7 @@ namespace GameOfGoose.Test
             Assert.That(player.Location.Id, Is.EqualTo(expectedLocation));
         }
 
-        [TestCase(4, 63, 55)]
+        [TestCase(5, 62, 49)]
         public void WhenPlayerMovingBackwardLandsOnGooseLocation_ThenLogLocationNumber(int diceroll, int startPosition, int expectedLocation)
         {
             // Arrange

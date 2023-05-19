@@ -20,7 +20,7 @@ namespace Game_of_Goose
         public ILocation Location { get; set; }
         public bool InWell { get; set; }
         public int SkipTurns { get; set; }
-        public int LastDiceRoll { get; set; }
+        public Dice LastDice { get; set; }
         public bool IsDirectionForward { get; set; }
         public bool IsWinner { get; set; }
         public string Message { get; set; }
@@ -38,18 +38,16 @@ namespace Game_of_Goose
                 Message = $"stuck in well:s{Location.Id}";
                 return;
             }
-            Message = $"{dice.DiceOne}+{dice.DiceTwo}:";
-            LastDiceRoll = dice.DiceTotal;
-            locationId = CalculateLocationId(LastDiceRoll);
-            locationId = CheckRoll(dice);
-            locationId = CalculateBackwardMovementIfPlayerMovedPast63(locationId);
+            
+            LastDice = dice;
+            locationId = CheckNewLocationBasedOnRoll(LastDice);
             Location = Gameboard.Instance().GetLocation(locationId);
-            Message += $"s{Location.Id}";
+            Message += $"{dice.DiceOne}+{dice.DiceTwo}:s{Location.Id}";
             Location.OnPlayerLanded(this);
             IsDirectionForward = true;
         }
 
-        private int CheckRoll(Dice dice)
+        public int CheckNewLocationBasedOnRoll(Dice dice)
         {
             int locationId;
             if (Location.Id == 0 && dice.DiceTotal == 9)
@@ -76,7 +74,7 @@ namespace Game_of_Goose
         {
             if (SkipTurns > 0)
             {
-                SkipTurns = -1;
+                SkipTurns -= 1;
                 return true;
             }
             return false;
